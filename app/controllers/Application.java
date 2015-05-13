@@ -24,9 +24,11 @@ public class Application extends Controller {
 
     public static Result tasks(){
 
+
+
         Random rnd = new Random();
         Task task   = new Task();
-        task.name   = "ピザを" + rnd.nextInt(10) + "枚食べる";
+        task.name   = "ピザ" + rnd.nextInt(10) + "枚食べる";
         task.period = new Date();
         task.save();
 
