@@ -12,6 +12,7 @@ import java.util.Arrays;
 
 import models.Task;
 import java.util.Date;
+import java.util.Random;
 
 public class Application extends Controller {
 
@@ -23,15 +24,14 @@ public class Application extends Controller {
 
     public static Result tasks(){
 
+        Random rnd = new Random();
         Task task   = new Task();
-        task.name   = "Pizza を食べる";
+        task.name   = "ピザを" + rnd.nextInt(10) + "枚食べる";
         task.period = new Date();
         task.save();
 
         List<Task> taskList = Task.find.all();
-
-        return ok(tasks.render(taskList));
-
+        return ok(tasks.render(taskList,task));
 
     }
 
