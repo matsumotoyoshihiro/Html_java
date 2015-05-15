@@ -1,7 +1,22 @@
-@(taskList: List[Task], newTask: Task)
+@(taskList: List[Task], taskForm: Form[Task])
+
 
 @common("今もってるタスク") {
     <h1>タスク一覧</h1>
+
+
+<h2>Add a new task</h2>
+
+    <!-- name に関するエラーがあったら表示する -->
+    @for(error <- taskForm("name").errors) {
+        <p>@Messages(error.message)</p>
+    }
+
+
+
+
+
+
 
 	今回作ったタスクは「@newTask.name」です<br>
 
