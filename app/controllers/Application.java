@@ -16,9 +16,14 @@ import java.util.Random;
 import java.util.Map;
 import play.data.validation.Constraints.*;
 
+
+/* activetor h2-(ブラウザ) run
+   を行って、どのように表示されるかテストする */
+
 public class Application extends Controller {
 
-    public static Result index() {
+
+	public static Result index() {
 
     	System.out.println(flash("foo"));
         return ok(index.render("Your new application is ready."));
@@ -27,17 +32,12 @@ public class Application extends Controller {
     }
 
 
+	public static Form<Task> taskForm = Form.form(Task.class);
+
     public static Result tasks(){
-    	flash("foo","hoge");
+    	 List<Task> taskList = Task.find.all();
+         return ok(tasks.render(taskList, taskForm));
 
-        Random rnd = new Random();
-        Task task   = new Task();
-        task.name   = "ピザを" + rnd.nextInt(10) + "枚食べる";
-        task.period = new Date();
-       // task.save();
-
-        List<Task> taskList = Task.find.all();
-        return ok(tasks.render(taskList,task));
 
     }
 
@@ -49,11 +49,24 @@ public class Application extends Controller {
 
     public static Result createTask() {
 
-    	 Task newTask = Form.form(Task.class).bindFromRequest().get();
+    	Form<Task> form = taskForm.bindFromRequest();
 
-        newTask.save();
-        return redirect(routes.Application.tasks());
+        if (form.hasErrors()) {
+            List<Task> taskList = Task.find.all();
+
+            // 制約エラーが発生したら、その情報を持っ form を渡してあげる
+            return badRequest(tasks.render(taskList, form));
+        } else {
+            Task newTask = form.get();
+            newTask.save();
+            return redirect(routes.Application.tasks());
+        }
+
     }
+
+
+
+
 
 
 }
