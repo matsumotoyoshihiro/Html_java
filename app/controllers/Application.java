@@ -15,7 +15,7 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Map;
 import play.data.validation.Constraints.*;
-
+import play.data.Form;
 
 /* activetor h2-(ブラウザ) run
    を行って、どのように表示されるかテストする */
