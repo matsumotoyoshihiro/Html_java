@@ -19,7 +19,7 @@ import java.util.Map;
 
 import play.data.Form;
 
-/*ネームに未入力でもエラーが出てこない */
+
 
 public class Application extends Controller {
 
