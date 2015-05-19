@@ -17,8 +17,7 @@ import java.util.Map;
 import play.data.validation.Constraints.*;
 import play.data.Form;
 
-/* activetor h2-(ブラウザ) run
-   を行って、どのように表示されるかテストする */
+/*ネームに未入力でもエラーが出てこない */
 
 public class Application extends Controller {
 

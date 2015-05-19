@@ -7,6 +7,15 @@
 
 <h2>Add a new task</h2>
 
+<form action="@routes.Application.createTask()" method="POST">
+    <p>
+        name: <input type="text" name="name" />
+    </p>
+    <input type="submit" value="Create" />
+</form>
+
+
+
     <!-- name に関するエラーがあったら表示する -->
     @for(error <- taskForm("name").errors) {
         <p>@Messages(error.message)</p>
