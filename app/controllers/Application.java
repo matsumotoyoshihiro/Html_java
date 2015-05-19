@@ -14,7 +14,9 @@ import models.Task;
 import java.util.Date;
 import java.util.Random;
 import java.util.Map;
-import play.data.validation.Constraints.*;
+
+
+
 import play.data.Form;
 
 /*ネームに未入力でもエラーが出てこない */
