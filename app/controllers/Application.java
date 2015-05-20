@@ -62,7 +62,7 @@ public class Application extends Controller {
             newTask.save();
             return redirect(routes.Application.tasks());
         }
-
+///パブリックの削除項目の作成をおこなう
     }
 
 
