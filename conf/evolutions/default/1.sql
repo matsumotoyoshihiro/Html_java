@@ -5,8 +5,9 @@
 
 create table task (
   id                        integer not null,
-  name                      varchar(255),
   period                    timestamp,
+  name                      varchar(255),
+  pass                      varchar(255),
   constraint pk_task primary key (id))
 ;
 

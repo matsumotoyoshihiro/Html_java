@@ -6,6 +6,10 @@
 GET     /                           controllers.Application.index()
 GET     /tasks                      controllers.Application.tasks()
 GET     /help                       controllers.Application.help()
+POST    /tasks                      controllers.Application.createTask()
+
+
+
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

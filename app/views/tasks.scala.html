@@ -1,9 +1,23 @@
-@(taskList: List[Task], newTask: Task)
+@(taskList: List[Task], taskForm: Form[Task])
+@import helper._
 
 @common("今もってるタスク") {
     <h1>タスク一覧</h1>
 
-	今回作ったタスクは「@newTask.name」です<br>
+
+<h2>Add a new task</h2>
+
+    @form(routes.Application.createTask()) {
+        @inputText(taskForm("name"), '_label -> "タスク名")
+
+        @inputDate(taskForm("pass"), '_label ->"期限")
+        <input type="submit" value="Create" />
+    }
+
+
+
+
+
 
 	これまでに作ったタスクの数 @taskList.size です。
     @if(taskList.isEmpty()) {
@@ -12,6 +26,7 @@
        <ul>
        @for(task <- taskList) {
            <li>@task.name</li>
+           <input type="submit" value="削除"   class="button" id="del">
        }
        </ul>
     }

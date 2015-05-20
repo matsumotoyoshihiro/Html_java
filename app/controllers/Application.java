@@ -13,25 +13,32 @@ import java.util.Arrays;
 import models.Task;
 import java.util.Date;
 import java.util.Random;
+import java.util.Map;
+
+
+
+import play.data.Form;
+
+
 
 public class Application extends Controller {
 
-    public static Result index() {
 
+	public static Result index() {
+
+    	System.out.println(flash("foo"));
         return ok(index.render("Your new application is ready."));
+
+
     }
 
 
+	public static Form<Task> taskForm = Form.form(Task.class);
+
     public static Result tasks(){
+    	 List<Task> taskList = Task.find.all();
+         return ok(tasks.render(taskList, taskForm));
 
-        Random rnd = new Random();
-        Task task   = new Task();
-        task.name   = "ピザを" + rnd.nextInt(10) + "枚食べる";
-        task.period = new Date();
-        task.save();
-
-        List<Task> taskList = Task.find.all();
-        return ok(tasks.render(taskList,task));
 
     }
 
@@ -39,6 +46,28 @@ public class Application extends Controller {
 
     	return ok(help.render());
     }
+
+
+    public static Result createTask() {
+
+    	Form<Task> form = taskForm.bindFromRequest();
+
+        if (form.hasErrors()) {
+            List<Task> taskList = Task.find.all();
+
+            // 制約エラーが発生したら、その情報を持っ form を渡してあげる
+            return badRequest(tasks.render(taskList, form));
+        } else {
+            Task newTask = form.get();
+            newTask.save();
+            return redirect(routes.Application.tasks());
+        }
+///パブリックの削除項目の作成をおこなう
+    }
+
+
+
+
 
 
 }
